@@ -4,6 +4,9 @@
   "directories": {
     "output": "release"
   },
+  "icon": "src/renderer/assets/logo.png",
+  "linux": {
+  },
   "files": [
     "dist/**/*",
     "dist-electron/**/*",
