@@ -5,20 +5,29 @@ import electron from 'vite-plugin-electron';
 
 export default defineConfig({
   extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
-  plugins: [
-    vue(),
-    electron({
-      main: {
-        entry: 'src/main/electron-main.js',
-      },
-      preload: {
-        input: 'src/main/electron-preload.js',
-      },
-    }),
-  ],
+  plugins: [vue(), electron([{
+    entry: 'src/main/electron-main.js',
+    onstart({
+      startup
+    }) {
+      startup();
+    },
+  }, {
+    entry: 'src/main/electron-preload.js',
+    onstart({
+      reload
+    }) {
+      reload();
+    },
+  }, ]), ],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        entry: 'src/renderer/main.js',
+      },
+    },
   },
   resolve: {
     alias: {
@@ -26,3 +35,4 @@ export default defineConfig({
     },
   },
 });
+;

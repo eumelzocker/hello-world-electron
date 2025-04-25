@@ -21,6 +21,7 @@ lerna-debug.log*
 # Builds
 dist
 dist-ssr
+dist-electron
 *.local
 release
 
