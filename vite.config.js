@@ -1,25 +1,24 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
-import electron from 'vite-plugin-electron';
 
 export default defineConfig({
-  extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
-  plugins: [vue(), electron([{
-    entry: 'src/main/electron-main.js',
-    onstart({
-      startup
-    }) {
-      startup();
+  plugins: [
+    vue(),
+  ],
+    build: {
+    outDir: 'dist',
+        rollupOptions: {
+            input: {
+                entry: "src/renderer/main.js",
+            },
+        },
     },
-  }, {
-    entry: 'src/main/electron-preload.js',
-    onstart({
-      reload
-    }) {
-      reload();
-    },
-  }, ]), ],
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "./src/renderer"),
+        },
+  ],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -32,6 +31,5 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src/renderer'),
-    },
-  },
+    },  },
 });

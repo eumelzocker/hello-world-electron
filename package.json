@@ -1,7 +1,7 @@
 {
   "name": "hello-world-electron-app",
   "version": "0.0.1",
-  "main": "dist/electron-main.js",
+  "main": "dist-electron/main.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -9,8 +9,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "electron:dev": "concurrently \"vite\" \"electron .\"",
-    "electron:build": "vite build && electron-builder",
+    "build:electron": "vite build --config vite.config.electron.js",
+    "electron:dev": "concurrently \"vite\" \"electron .\" ",
+    "electron:build": "npm run build:electron && electron-builder",
     "electron:preview": "vite build && electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,7 +26,6 @@
     "@vitejs/plugin-vue": "^5.2.3",
     "electron": "^35.2.1",
     "electron-builder": "^26.0.12",
-    "vite": "^6.3.3",
-    "vite-plugin-electron": "^0.29.0"
+    "vite": "^6.3.3"
   }
 }
